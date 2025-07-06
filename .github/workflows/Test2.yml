@@ -1,0 +1,14 @@
+name: Connect Ngrok
+
+on:
+  workflow_dispatch:
+
+jobs:
+  connect-ngrok:
+    runs-on: windows-2022
+    steps:
+      - name: Connect Ngrok
+        run: |
+          .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH
+        env:
+          NGROK_AUTH: ${{ secrets.NGROK_AUTH }}
