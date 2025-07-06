@@ -1,0 +1,9 @@
+- name: Test NGROK_AUTH value
+  run: |
+    if ($Env:NGROK_AUTH -eq $null -or $Env:NGROK_AUTH -eq "") {
+      throw "NGROK_AUTH is missing!"
+    } else {
+      Write-Output "NGROK_AUTH exists."
+    }
+  env:
+    NGROK_AUTH: ${{ secrets.NGROK_AUTH }}
