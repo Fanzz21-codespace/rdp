@@ -1,0 +1,18 @@
+name: Test NGROK_AUTH Value
+
+on:
+  workflow_dispatch
+
+jobs:
+  check-token:
+    runs-on: windows-latest
+    steps:
+      - name: Check NGROK_AUTH secret
+        run: |
+          if ($Env:NGROK_AUTH -eq $null -or $Env:NGROK_AUTH -eq "") {
+            throw "NGROK_AUTH is missing!"
+          } else {
+            Write-Output "✅ NGROK_AUTH exists and is loaded properly."
+          }
+        env:
+          NGROK_AUTH: ${{ secrets.NGROK_AUTH }}
