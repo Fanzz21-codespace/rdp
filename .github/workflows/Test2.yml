@@ -7,6 +7,12 @@ jobs:
   connect-ngrok:
     runs-on: windows-2022
     steps:
+      - name: Download Ngrok
+        run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
+
+      - name: Extract Ngrok
+        run: Expand-Archive ngrok.zip -DestinationPath ngrok
+
       - name: Connect Ngrok
         run: |
           .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH
